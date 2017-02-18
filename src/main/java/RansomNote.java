@@ -23,25 +23,20 @@ public class RansomNote {
         Scanner in = new Scanner(System.in);
         int m = in.nextInt();
         int n = in.nextInt();
-        String magazine[] = new String[m];
+        LinkedList<String> magazineList = new LinkedList();
         for(int magazine_i=0; magazine_i < m; magazine_i++){
-            magazine[magazine_i] = in.next();
+            magazineList.add(in.next());
         }
         String ransom[] = new String[n];
         for(int ransom_i=0; ransom_i < n; ransom_i++){
             ransom[ransom_i] = in.next();
         }
-        System.out.println(solution(magazine, ransom));
+        System.out.println(solution(magazineList, ransom));
     }
 
-    public static String solution(String magazine[], String ransom[]) {
+    public static String solution(LinkedList<String> magazineList, String ransom[]) {
         final String YES = "Yes";
         final String NO = "No";
-
-        LinkedList<String> magazineList = new LinkedList();
-        for (String s : magazine) {
-            magazineList.add(s);
-        }
         String res = NO;
         for (String s : ransom) {
             if (magazineList.contains(s)) {
