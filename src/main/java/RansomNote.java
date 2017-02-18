@@ -1,4 +1,5 @@
-import java.util.LinkedList;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -23,29 +24,38 @@ public class RansomNote {
         Scanner in = new Scanner(System.in);
         int m = in.nextInt();
         int n = in.nextInt();
-        LinkedList<String> magazineList = new LinkedList();
+        Map<String, Integer> magazineList = new Hashtable<>();
         for(int magazine_i=0; magazine_i < m; magazine_i++){
-            magazineList.add(in.next());
+            mapPusher(magazineList, in.next());
         }
-        String ransom[] = new String[n];
+        Map<String, Integer> ransom = new Hashtable<>();
         for(int ransom_i=0; ransom_i < n; ransom_i++){
-            ransom[ransom_i] = in.next();
+            mapPusher(ransom, in.next());
         }
         System.out.println(solution(magazineList, ransom));
     }
 
-    public static String solution(LinkedList<String> magazineList, String ransom[]) {
+    public static String solution(Map<String, Integer> magazine, Map<String, Integer> ransom) {
         final String YES = "Yes";
         final String NO = "No";
         String res = NO;
-        for (String s : ransom) {
-            if (magazineList.contains(s)) {
-                magazineList.remove(s);
+        for (String word : ransom.keySet()) {
+            Integer val = magazine.get(word);
+            if (val != null && val >= ransom.get(word)) {
                 res = YES;
             } else {
                 return NO;
             }
         }
         return res;
+    }
+
+    private static void mapPusher(Map<String, Integer> map, String word) {
+        Integer val = map.get(word);
+        if (val != null) {
+            map.put(word, val + 1);
+        } else {
+            map.put(word, 1);
+        }
     }
 }
