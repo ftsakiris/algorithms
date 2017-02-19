@@ -7,5 +7,6 @@ public class StacksBalancedBracketsTest {
         Assert.assertEquals(true, StacksBalancedBrackets.isBalanced("{[()]}"));
         Assert.assertEquals(false, StacksBalancedBrackets.isBalanced("{[(])}"));
         Assert.assertEquals(true, StacksBalancedBrackets.isBalanced("{{[[(())]]}}"));
+        Assert.assertEquals(true, StacksBalancedBrackets.isBalanced("()(())()"));
     }
 }

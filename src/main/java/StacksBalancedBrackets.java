@@ -41,8 +41,11 @@ public class StacksBalancedBrackets {
         }
         Map<Character, Character> helperMap = new Hashtable<>();
         helperMap.put(')', '(');
+        helperMap.put('(', ')');
         helperMap.put(']', '[');
+        helperMap.put('[', ']');
         helperMap.put('}', '{');
+        helperMap.put('{', '}');
         Stack<Character> left = new Stack<>();
         int halfSize = chars.length / 2;
         for (int i = 0; i < halfSize; i++) {
