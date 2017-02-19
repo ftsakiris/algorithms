@@ -35,28 +35,34 @@ public class StacksBalancedBrackets {
     }
 
     public static boolean isBalanced(String expression) {
-        char[] chars = expression.toCharArray();
-        if (chars.length % 2 > 0) {
-            return false;
-        }
-        Map<Character, Character> helperMap = new Hashtable<>();
-        helperMap.put(')', '(');
-        helperMap.put('(', ')');
-        helperMap.put(']', '[');
-        helperMap.put('[', ']');
-        helperMap.put('}', '{');
-        helperMap.put('{', '}');
-        Stack<Character> left = new Stack<>();
-        int halfSize = chars.length / 2;
-        for (int i = 0; i < halfSize; i++) {
-            left.push(chars[i]);
-        }
-        for (int i = halfSize; i < chars.length; i++) {
-            Character lastAdded = left.pop();
-            if (!lastAdded.equals(helperMap.get(chars[i]))) {
-                return false;
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+            if (c == '[' || c == '(' || c == '{') {
+                stack.push(c);
+            } else if (c == ']') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                if (stack.pop() != '[') {
+                    return false;
+                }
+            } else if (c == ')') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                if (stack.pop() != '(') {
+                    return false;
+                }
+            } else if (c == '}') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                if (stack.pop() != '{') {
+                    return false;
+                }
             }
         }
-        return true;
+        return stack.isEmpty();
     }
 }
