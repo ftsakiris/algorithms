@@ -1,7 +1,4 @@
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 /**
  *
@@ -46,17 +43,16 @@ public class StacksBalancedBrackets {
         helperMap.put(')', '(');
         helperMap.put(']', '[');
         helperMap.put('}', '{');
-        Vector<Character> left = new Vector<>();
+        Stack<Character> left = new Stack<>();
         int halfSize = chars.length / 2;
         for (int i = 0; i < halfSize; i++) {
-            left.add(chars[i]);
+            left.push(chars[i]);
         }
         for (int i = halfSize; i < chars.length; i++) {
-            Character lastAdded = left.lastElement();
+            Character lastAdded = left.pop();
             if (!lastAdded.equals(helperMap.get(chars[i]))) {
                 return false;
             }
-            left.remove(lastAdded);
         }
         return true;
     }
